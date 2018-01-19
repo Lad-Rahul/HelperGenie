@@ -1,5 +1,7 @@
 package com.example.lad.helpergenie;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +18,8 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        fragmentManager =  getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new homeActivity()).commit();
     }
 
     @Override
@@ -80,9 +86,10 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        fragmentManager =  getFragmentManager();
 
         if (id == R.id.nav_home) {
-
+            fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new homeActivity()).commit();
         } else if (id == R.id.nav_profile) {
 
         } else if (id == R.id.nav_history) {
@@ -94,7 +101,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
 
         }else if (id == R.id.nav_aboutus) {
-
+            fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new about_us()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
