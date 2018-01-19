@@ -3,8 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HelperGenie.iml" filepath="$PROJECT_DIR$/HelperGenie.iml" />
-      <module fileurl="file://C:\Users\LAD\AndroidStudioProjects\HelperGenie\HelperGiene.iml" filepath="C:\Users\LAD\AndroidStudioProjects\HelperGenie\HelperGiene.iml" />
+      <module fileurl="file://C:\Users\Pro\AMOC\HelperGenie\HelperGenie.iml" filepath="C:\Users\Pro\AMOC\HelperGenie\HelperGenie.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Pro\AMOC\HelperGenie\app\app.iml" filepath="C:\Users\Pro\AMOC\HelperGenie\app\app.iml" />
     </modules>
   </component>
 </project>
