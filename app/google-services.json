@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "904135181750",
+    "firebase_url": "https://helpergenie-16ed3.firebaseio.com",
+    "project_id": "helpergenie-16ed3",
+    "storage_bucket": "helpergenie-16ed3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904135181750:android:86e3ccdca6222625",
+        "android_client_info": {
+          "package_name": "com.example.lad.helpergenie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904135181750-rsof0kcllb446kd6dp5lnfe86rei4our.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCw7i1uP17TH0iS17MdMKgEJGu9WtWBvCA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
