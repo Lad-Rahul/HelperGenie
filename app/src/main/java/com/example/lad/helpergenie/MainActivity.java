@@ -16,11 +16,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.firebase.ui.auth.AuthUI;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final int RC_SIGN_IN = 1234;
+
     FragmentManager fragmentManager;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +38,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +59,37 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         fragmentManager =  getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new homeActivity()).commit();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN && resultCode == RESULT_OK){
+            Toast.makeText(MainActivity.this, " Succesfully Signed in", Toast.LENGTH_SHORT).show();
+        } else if (requestCode == RC_SIGN_IN && resultCode == RESULT_CANCELED){
+            finish();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null) {
+            // signed In
+            Toast.makeText(MainActivity.this, user.getDisplayName()+" is Logged in !", Toast.LENGTH_SHORT).show();
+        } else {
+            // not signed in
+            startActivityForResult(
+                    AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setAvailableProviders(
+                                    Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                                            new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
+                            .setIsSmartLockEnabled(false)
+                            .build(),
+                    RC_SIGN_IN);
+        }
     }
 
     @Override
@@ -74,8 +116,10 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
+            AuthUI.getInstance().signOut(this);
+            Toast.makeText(MainActivity.this, "Sucessfully LoggedOut", Toast.LENGTH_SHORT).show();
+            onResume();
             return true;
         }
 
@@ -92,15 +136,16 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new homeActivity()).commit();
         } else if (id == R.id.nav_profile) {
-
+            fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new ProfileActivity()).commit();
         } else if (id == R.id.nav_history) {
-
+            fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new HistoryActivity()).commit();
         } else if (id == R.id.nav_help) {
-
+            fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new HelpActivity()).commit();
         } else if (id == R.id.nav_logout) {
-
+            AuthUI.getInstance().signOut(MainActivity.this);
+            Toast.makeText(MainActivity.this, "Sucessfully LoggedOut", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_share) {
-
+            Toast.makeText(MainActivity.this, "Sharing ...", Toast.LENGTH_SHORT).show();
         }else if (id == R.id.nav_aboutus) {
             fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new about_us()).commit();
         }
