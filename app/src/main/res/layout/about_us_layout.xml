@@ -34,7 +34,7 @@
         android:layout_marginStart="8dp"
 
         android:layout_marginTop="8dp"
-        android:text="App that can help you in today's busy high-tech world.We will provide you services like plumber,electritian and carpenter at any time at any location on one mobile click."
+        android:text="App that can help you in today's busy high-tech world.We will provide you services like plumber,electritian and carpenter at any time at any location on one mobile touch."
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
