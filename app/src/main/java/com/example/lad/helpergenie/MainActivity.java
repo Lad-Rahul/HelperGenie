@@ -90,6 +90,9 @@ public class MainActivity extends AppCompatActivity
                             .build(),
                     RC_SIGN_IN);
         }
+
+        Intent i1 = new Intent(this,TrialFirebase.class);
+        startActivity(i1);
     }
 
     @Override
