@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_logout) {
             AuthUI.getInstance().signOut(MainActivity.this);
             Toast.makeText(MainActivity.this, "Sucessfully LoggedOut", Toast.LENGTH_SHORT).show();
+            onResume();
         } else if (id == R.id.nav_share) {
             ApplicationInfo api = getApplicationContext().getApplicationInfo();
             String apkPath = api.sourceDir;
