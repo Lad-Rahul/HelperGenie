@@ -40,42 +40,17 @@ public class TrialFirebase extends AppCompatActivity {
         ValueEventListener val = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                /*ArrayList<DataSnapshot> dataSnapshots = new ArrayList<DataSnapshot>();
-                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-                for (DataSnapshot x : children){
-                    dataSnapshots.add(x);
-                }
-                Log.e("kjhkhjh","Count in 1st datasnapshots is "+dataSnapshots.get(0).getChildrenCount());
-                Log.e("kjhkhjh","Count in 2nd datasnapshots is "+dataSnapshots.get(1).getChildrenCount());
-                for (int y = 0; y < dataSnapshots.size() ; y++){
-                    Log.e("jhjkuhh","Size is now "+y);
-                }
-
-                ArrayList<String> strs = new ArrayList<String>();
-                for(DataSnapshot datas : dataSnapshots){
-                    strs.add(datas.getValue(String.class));
-                }
-
-                if(!strs.isEmpty()) {
-                    for (int p = 0; p < strs.size(); p++) {
-                        Log.e("Debugging ", p + "th String is " + strs.get(p));
-                    }
-                }else{
-                    Log.e("Sorry","Size is zero");
-                }
-                Log.e("Address is ",""+strs.get(0));*/
-
                 FireUser fireUser = dataSnapshot.getValue(FireUser.class);
                 String name = fireUser.getName();
                 String email = fireUser.getEmail();
                 String pincode = fireUser.getPincode();
-                String address = fireUser.getAddress();
+                String address1 = fireUser.getAddress();
                 String mobile = fireUser.getMobile();
 
                 Log.e("Debugging : ","name is "+name);
                 Log.e("Debugging : ","Email is "+email);
                 Log.e("Debugging : ","Pincode is "+pincode);
-                Log.e("Debugging : ","Address is "+address);
+                Log.e("Debugging : ","Address is "+address1);
                 Log.e("Debugging : ","Mobile is "+mobile);
             }
 

@@ -4,6 +4,7 @@ import android.os.FileUriExposedException;
 
 public class FireUser {
     private String address;
+    private String address2;
     private String email;
     private String mobile;
     private String name;
@@ -12,8 +13,9 @@ public class FireUser {
     public FireUser(){
     }
 
-    public FireUser(String address,String email, String mobile,String name, String pincode){
-        this.address = address;
+    public FireUser(String address1,String address2,String email, String mobile,String name, String pincode){
+        this.address = address1;
+        this.address2 = address2;
         this.email = email;
         this.name = name;
         this.mobile = mobile ;
@@ -24,8 +26,16 @@ public class FireUser {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddress(String address1) {
+        this.address = address1;
+    }
+
+    public String getAddress2() {
+        return address2;
+    }
+
+    public void setAddress2(String address2) {
+        this.address2 = address2;
     }
 
     public String getEmail() {

@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity
         FirebaseUser user = auth.getCurrentUser();
         if (user != null) {
             // signed In
+            Toast.makeText(MainActivity.this, "User EmailId is "+user.getEmail().toString(), Toast.LENGTH_SHORT).show();
             Toast.makeText(MainActivity.this, user.getDisplayName()+" is Logged in !", Toast.LENGTH_SHORT).show();
         } else {
             // not signed in
