@@ -94,8 +94,9 @@ public class MainActivity extends AppCompatActivity
                     RC_SIGN_IN);
         }
 
-        Intent i1 = new Intent(this,TrialFirebase.class);
-        startActivity(i1);
+        //Only For DEVELOPMENT OF RETRIVEING DATA:::::::::::::::::::::::
+        //Intent i1 = new Intent(this,TrialFirebase.class);
+        //startActivity(i1);
     }
 
     @Override
