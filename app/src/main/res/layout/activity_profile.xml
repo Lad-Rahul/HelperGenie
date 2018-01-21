@@ -1,6 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
 
-</android.support.constraint.ConstraintLayout>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/relative_layout">
+
+        <ImageView
+            android:id="@+id/header_cover_image"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="centerCrop"
+            android:src="@drawable/nav_menu_header_bg_300x170"
+            app:srcCompat="@drawable/nav_menu_header_bg_300x170" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_picture"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/man"
+            android:clickable="true"
+            app:civ_border_width="3dp"
+            app:civ_border_color="#FFFFFFFF"
+            android:scaleType="centerCrop"
+            android:padding="20dp"
+            android:elevation="5dp"
+            android:layout_marginTop="-105dp"
+            android:layout_below="@id/header_cover_image"/>
+
+        <RelativeLayout
+            android:id="@+id/profile_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header_cover_image"
+            android:background="#ebca0707"
+            android:elevation="4dp"
+            android:paddingBottom="50dp">
+
+            <ImageView
+                android:id="@+id/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="14dp"
+                android:src="@drawable/ic_mode_edit_black_24dp"
+                android:clickable="true"/>
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="76dp"
+                android:text="name"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/location"
+                android:text="location"
+                android:textSize="20sp"
+                android:layout_centerHorizontal="true"
+                android:textColor="#fff"
+                android:layout_marginTop="116dp"/>
+        </RelativeLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/profile_layout"
+        android:background="#fff"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address: "
+            android:textSize="20sp"
+            android:id="@+id/address"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="write address here"
+            android:textSize="20sp"
+            android:clickable="true"
+            android:id="@+id/write_address"
+            app:layout_constraintLeft_toRightOf="@+id/address"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email: "
+            app:layout_constraintTop_toBottomOf="@+id/write_address"
+            android:paddingTop="7dp"
+            android:textSize="20sp"
+            android:id="@+id/email"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="write email here"
+            android:textSize="20sp"
+            android:paddingTop="7dp"
+            app:layout_constraintTop_toBottomOf="@id/write_address"
+            android:id="@+id/write_email"
+            android:clickable="true"
+            app:layout_constraintLeft_toRightOf="@+id/email"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mobile number: "
+            android:id="@+id/mobile"
+            app:layout_constraintTop_toBottomOf="@id/email"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="7dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter mobile number"
+            android:textSize="20sp"
+            android:clickable="true"
+            android:id="@+id/write_mobile"
+            app:layout_constraintTop_toBottomOf="@id/write_email"
+            app:layout_constraintLeft_toRightOf="@id/mobile"
+            android:paddingTop="7dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pincode: "
+            android:textSize="20sp"
+            android:id="@+id/pincode"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/mobile"
+            android:paddingTop="7dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter pincode"
+            android:textSize="20sp"
+            android:id="@+id/write_pincode"
+            app:layout_constraintTop_toBottomOf="@id/write_mobile"
+            app:layout_constraintLeft_toRightOf="@id/pincode"
+            android:paddingTop="7dp"
+            />
+    </android.support.constraint.ConstraintLayout>
+    </RelativeLayout>
+</ScrollView>

@@ -3,6 +3,8 @@ package com.example.lad.helpergenie;
 
 
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,6 +24,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.File;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity
@@ -148,7 +151,13 @@ public class MainActivity extends AppCompatActivity
             AuthUI.getInstance().signOut(MainActivity.this);
             Toast.makeText(MainActivity.this, "Sucessfully LoggedOut", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_share) {
-            Toast.makeText(MainActivity.this, "Sharing ...", Toast.LENGTH_SHORT).show();
+            ApplicationInfo api = getApplicationContext().getApplicationInfo();
+            String apkPath = api.sourceDir;
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.setType("application/vnd.android.package-archive");
+            share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(apkPath)));
+            startActivity(Intent.createChooser(share,"Start Using..."));
+
         }else if (id == R.id.nav_aboutus) {
             fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new about_us()).commit();
         }
