@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -83,6 +84,7 @@ public class SignUpFormActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        AuthUI.getInstance().signOut(SignUpFormActivity.this);
         super.onBackPressed();
     }
 }
