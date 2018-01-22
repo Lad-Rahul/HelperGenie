@@ -2,6 +2,7 @@ package com.example.lad.helpergenie;
 
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,6 +25,11 @@ import android.widget.Toast;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.util.Arrays;
@@ -31,9 +38,13 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final int RC_SIGN_IN = 1234;
+    private ProgressDialog pd2;
 
     FragmentManager fragmentManager;
     FirebaseAuth auth = FirebaseAuth.getInstance();
+    public static String CurrUser;
+    public static String MainCurrUserEmail;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,13 +88,24 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
+        pd2 = new ProgressDialog(MainActivity.this);
+        pd2.setCancelable(false);
+        pd2.setMessage("Veryfying Your Data....\nMake sure you have active connection");
+        pd2.setTitle("Veryfying");
+        pd2.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd2.show();
         FirebaseUser user = auth.getCurrentUser();
         if (user != null) {
             // signed In
             Toast.makeText(MainActivity.this, "User EmailId is "+user.getEmail().toString(), Toast.LENGTH_SHORT).show();
             Toast.makeText(MainActivity.this, user.getDisplayName()+" is Logged in !", Toast.LENGTH_SHORT).show();
+            CurrUser = user.getDisplayName();
+            MainCurrUserEmail = user.getEmail().toString();
+            pd2.dismiss();
+            checkFormAndSaveDetails(user.getEmail().toString().replace(".",""),user.getDisplayName());
         } else {
             // not signed in
+            pd2.dismiss();
             startActivityForResult(
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
@@ -98,6 +120,34 @@ public class MainActivity extends AppCompatActivity
         //Only For DEVELOPMENT OF RETRIVEING DATA:::::::::::::::::::::::
         //Intent i1 = new Intent(this,TrialFirebase.class);
         //startActivity(i1);
+    }
+
+    private void checkFormAndSaveDetails(String userEmail,String userName) {
+        FirebaseDatabase mData;
+        DatabaseReference mRef;
+
+        mData = FirebaseDatabase.getInstance();
+        mRef = mData.getReference().child("users").child(userEmail);
+
+        ValueEventListener val = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                FireUser fireUser = dataSnapshot.getValue(FireUser.class);
+                if (fireUser == null){
+                    Intent i1 =  new Intent(MainActivity.this,SignUpFormActivity.class);
+                    startActivity(i1);
+                }else{
+
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        mRef.addValueEventListener(val);
+
+
     }
 
     @Override
