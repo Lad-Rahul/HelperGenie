@@ -1,14 +1,19 @@
 package com.example.lad.helpergenie;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,7 +34,9 @@ public class homeActivity extends Fragment {
     Spinner searchSP;
     Spinner searchPin;
     private FirebaseDatabase mData;
-    private DatabaseReference mRef;
+    private DatabaseReference mRef,mRef2;
+    private String selectPin;
+    private Button BtngetSP;
 
     @Nullable
     @Override
@@ -41,7 +48,7 @@ public class homeActivity extends Fragment {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,listSP);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         searchSP.setAdapter(arrayAdapter);
-
+        final ArrayList<String> pinObjectList = new ArrayList<>();
         searchPin = (Spinner)mView.findViewById(R.id.search_PIN);
 
         mData = FirebaseDatabase.getInstance();
@@ -59,6 +66,67 @@ public class homeActivity extends Fragment {
 
             }
         });
+
+
+
+        searchPin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getActivity(), searchPin.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show();
+                selectPin = searchPin.getItemAtPosition(i).toString();
+                mRef2 = mData.getReference().child("pincode").child(selectPin);
+
+
+
+
+                mRef2.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        pinObjectList.clear();
+                        for(Map.Entry<String,Object> entry : ((Map<String,Object>)dataSnapshot.getValue()).entrySet()){
+
+                            String SinglePin = (String)entry.getValue();
+                            pinObjectList.add(SinglePin);
+//                            Map SingleUser = (Map)entry.getValue();
+//                            pinObjectList.add(SingleUser);
+
+                        }
+//                        for(int i=0;i<pinObjectList2.size();i++){
+//                            if(pinObjectList2.get(i) != null) {
+//                                Log.d("debugging", pinObjectList2.get(i).toString());
+//                            }
+//                            else
+//                            {
+//                                Log.d("debugging","object is Null");
+//                            }
+//                        }
+                    }
+
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        BtngetSP = (Button)mView.findViewById(R.id.btn_getSP);
+        BtngetSP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),get_sp.class);
+                intent.putStringArrayListExtra("Service Provider at this Location",pinObjectList);
+                startActivity(intent);
+            }
+        });
+
 
         return mView;
     }
@@ -82,4 +150,6 @@ public class homeActivity extends Fragment {
         searchPin.setAdapter(arrayAdapter2);
 
     }
+
+
 }
