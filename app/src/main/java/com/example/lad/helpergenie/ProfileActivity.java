@@ -2,6 +2,9 @@ package com.example.lad.helpergenie;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,10 +12,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,8 +40,10 @@ public class ProfileActivity extends Fragment {
     private FirebaseDatabase mData;
     private DatabaseReference mRef;
     private String name,email,pincode,address1,address2,mobile;
+    private ImageView mProfileImage;
+    private final int SELECTING_IMAGE = 100;
     FirebaseAuth auth = FirebaseAuth.getInstance();
-
+    private Uri downloadPic;
 
     View mView;
 
@@ -56,6 +63,7 @@ public class ProfileActivity extends Fragment {
         mMobileTextView=(TextView)mView.findViewById(R.id.write_mobile);
         mPincodeTextView=(TextView)mView.findViewById(R.id.write_pincode);
         mName = (TextView)mView.findViewById(R.id.name);
+        mProfileImage = (ImageView)mView.findViewById(R.id.edit);
 
         mData = FirebaseDatabase.getInstance();
 
@@ -113,6 +121,15 @@ public class ProfileActivity extends Fragment {
         };
         mRef.addValueEventListener(val);
 
+        mProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                getActivity().startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECTING_IMAGE);
+            }
+        });
         return mView;
     }
 }

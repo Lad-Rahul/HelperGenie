@@ -20,9 +20,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +32,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.util.Arrays;
@@ -44,7 +49,11 @@ public class MainActivity extends AppCompatActivity
     FirebaseAuth auth = FirebaseAuth.getInstance();
     public static String CurrUser;
     public static String MainCurrUserEmail;
+    public ImageView mProfileImage;
+    public final int SELECTING_IMAGE = 100;
 
+    FirebaseStorage mStorageRef;
+    StorageReference mPictures;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +61,10 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mStorageRef = FirebaseStorage.getInstance();
+        mProfileImage = (ImageView)findViewById(R.id.edit);
+        mPictures = mStorageRef.getReference().child("users_pic");
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -73,6 +86,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         fragmentManager =  getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new homeActivity()).commit();
+
     }
 
     @Override
@@ -80,8 +94,24 @@ public class MainActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN && resultCode == RESULT_OK){
             Toast.makeText(MainActivity.this, " Succesfully Signed in", Toast.LENGTH_SHORT).show();
-        } else if (requestCode == RC_SIGN_IN && resultCode == RESULT_CANCELED){
+        }else if (requestCode == RC_SIGN_IN && resultCode == RESULT_CANCELED){
             finish();
+        }else if (requestCode == SELECTING_IMAGE && resultCode == RESULT_OK){
+            Toast.makeText(MainActivity.this, " Succesfully Selected Image", Toast.LENGTH_SHORT).show();
+            Uri uri = data.getData();
+            StorageReference profilePic = mPictures.child(MainCurrUserEmail.replace(".",""));
+            profilePic.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(MainActivity.this, "Uploaded Image", Toast.LENGTH_SHORT).show();
+                    Uri downloadPic = taskSnapshot.getDownloadUrl();
+                    ////////////////////Wprk in progress///////////////////////////////////
+                    //////////////////////////////////////////////////////////////////////
+                    ///////////////////ProfileActivity pf = new ProfileActivity(downloadPic);
+                }
+            });
+        } else if (requestCode == SELECTING_IMAGE && resultCode == RESULT_CANCELED){
+            Toast.makeText(this, "Error Selecting Image", Toast.LENGTH_SHORT).show();
         }
     }
 
