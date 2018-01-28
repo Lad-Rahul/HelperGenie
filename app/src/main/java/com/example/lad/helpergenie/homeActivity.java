@@ -35,7 +35,7 @@ public class homeActivity extends Fragment {
     Spinner searchPin;
     private FirebaseDatabase mData;
     private DatabaseReference mRef,mRef2;
-    private String selectPin;
+    private String selectPin,selectPro;
     private Button BtngetSP;
 
     @Nullable
@@ -48,6 +48,24 @@ public class homeActivity extends Fragment {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,listSP);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         searchSP.setAdapter(arrayAdapter);
+
+        searchSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getActivity(),searchSP.getItemAtPosition(i).toString(),Toast.LENGTH_SHORT).show();
+                selectPro = searchSP.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
+
+
         final ArrayList<String> pinObjectList = new ArrayList<>();
         searchPin = (Spinner)mView.findViewById(R.id.search_PIN);
 
@@ -77,29 +95,18 @@ public class homeActivity extends Fragment {
                 mRef2 = mData.getReference().child("pincode").child(selectPin);
 
 
-
-
                 mRef2.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         pinObjectList.clear();
                         for(Map.Entry<String,Object> entry : ((Map<String,Object>)dataSnapshot.getValue()).entrySet()){
 
-                            String SinglePin = (String)entry.getValue();
+                            String SinglePin = (String)entry.getKey();
                             pinObjectList.add(SinglePin);
 //                            Map SingleUser = (Map)entry.getValue();
 //                            pinObjectList.add(SingleUser);
 
                         }
-//                        for(int i=0;i<pinObjectList2.size();i++){
-//                            if(pinObjectList2.get(i) != null) {
-//                                Log.d("debugging", pinObjectList2.get(i).toString());
-//                            }
-//                            else
-//                            {
-//                                Log.d("debugging","object is Null");
-//                            }
-//                        }
                     }
 
 
@@ -123,6 +130,7 @@ public class homeActivity extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(),get_sp.class);
                 intent.putStringArrayListExtra("Service Provider at this Location",pinObjectList);
+                intent.putExtra("Service Provider Proffesion",selectPro);
                 startActivity(intent);
             }
         });
