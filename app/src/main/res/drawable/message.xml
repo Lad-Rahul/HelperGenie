@@ -5,11 +5,11 @@
         <shape android:shape="rectangle">
 
             <stroke
-            android:width="4dp"
+            android:width="1dp"
              />
 
             <corners
-            android:radius="16dp"/>
+            android:radius="20dp"/>
 
             <padding
                 android:bottom="8dp"
