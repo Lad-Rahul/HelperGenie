@@ -1,7 +1,5 @@
 package com.example.lad.helpergenie;
 
-
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -94,25 +92,26 @@ public class MainActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN && resultCode == RESULT_OK){
             Toast.makeText(MainActivity.this, " Succesfully Signed in", Toast.LENGTH_SHORT).show();
-        }else if (requestCode == RC_SIGN_IN && resultCode == RESULT_CANCELED){
+        }else if (requestCode == RC_SIGN_IN && resultCode == RESULT_CANCELED) {
             finish();
-        }else if (requestCode == SELECTING_IMAGE && resultCode == RESULT_OK){
-            Toast.makeText(MainActivity.this, " Succesfully Selected Image", Toast.LENGTH_SHORT).show();
-            Uri uri = data.getData();
-            StorageReference profilePic = mPictures.child(MainCurrUserEmail.replace(".",""));
-            profilePic.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(MainActivity.this, "Uploaded Image", Toast.LENGTH_SHORT).show();
-                    Uri downloadPic = taskSnapshot.getDownloadUrl();
-                    ////////////////////Wprk in progress///////////////////////////////////
-                    //////////////////////////////////////////////////////////////////////
-                    ///////////////////ProfileActivity pf = new ProfileActivity(downloadPic);
-                }
-            });
-        } else if (requestCode == SELECTING_IMAGE && resultCode == RESULT_CANCELED){
-            Toast.makeText(this, "Error Selecting Image", Toast.LENGTH_SHORT).show();
         }
+//        else if (requestCode == SELECTING_IMAGE && resultCode == RESULT_OK){
+//            Toast.makeText(MainActivity.this, " Succesfully Selected Image", Toast.LENGTH_SHORT).show();
+//            Uri uri = data.getData();
+//            StorageReference profilePic = mPictures.child(MainCurrUserEmail.replace(".",""));
+//            profilePic.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                @Override
+//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                    Toast.makeText(MainActivity.this, "Uploaded Image", Toast.LENGTH_SHORT).show();
+//                    Uri downloadPic = taskSnapshot.getDownloadUrl();
+//                    ////////////////////Wprk in progress///////////////////////////////////
+//                    //////////////////////////////////////////////////////////////////////
+//                    ///////////////////ProfileActivity pf = new ProfileActivity(downloadPic);
+//                }
+//            });
+//        } else if (requestCode == SELECTING_IMAGE && resultCode == RESULT_CANCELED){
+//            Toast.makeText(this, "Error Selecting Image", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     @Override
