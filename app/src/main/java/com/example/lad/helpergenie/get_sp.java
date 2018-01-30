@@ -29,7 +29,7 @@ public class get_sp extends AppCompatActivity {
 
         textView = (TextView)findViewById(R.id.textView2);
 
-        final ArrayList<FireSP> ListSP2 = new ArrayList<>();
+        final ArrayList<String> ListSP2 = new ArrayList<>();
         ArrayList<String> ListSP = new ArrayList<>();
         String newString;
         if (savedInstanceState == null) {
@@ -51,9 +51,11 @@ public class get_sp extends AppCompatActivity {
         mData = FirebaseDatabase.getInstance();
 
         for (int i = 0; i < ListSP.size(); i++) {
-            String tempSP = ListSP.get(i);
+            final String tempSP = ListSP.get(i);
             mRef = mData.getReference().child("service-provider").child(tempSP);
             //Log.d("hello1", mData.getReference().child("service-provider").child(tempSP).child("name").toString());
+            final int finalI = i;
+            final ArrayList<String> finalListSP = ListSP;
             ValueEventListener valueEventListener = new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -70,11 +72,15 @@ public class get_sp extends AppCompatActivity {
 
                     if(proffesion.equals(SPpro)){
                         Log.d("hello1","name :" + name);
-                        ListSP2.add(0,fireSP);
+                        ListSP2.add(0,tempSP);
                         //ListSP2.add(fireSP);
                     }
-                    int temp3 = ListSP2.size();
-                    Log.d("hello1","after adding "+temp3);
+
+                    if(finalI == finalListSP.size()-1){
+                        Intent intent=new Intent(get_sp.this,displaySP.class);
+                        intent.putExtra("Service providers selected",ListSP2);
+                        startActivity(intent);
+                    }
                     //FireSP i = new FireSP(email,mobile,name,proffesion);
                 }
 
@@ -98,5 +104,6 @@ public class get_sp extends AppCompatActivity {
 //            textView.setText(name + email + mobile + proffesion);
 //            Log.d("hello1",name + email + mobile + proffesion);
 //        }
+
     }
 }
