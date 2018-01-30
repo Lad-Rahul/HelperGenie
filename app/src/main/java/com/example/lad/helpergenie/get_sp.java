@@ -68,8 +68,12 @@ public class get_sp extends AppCompatActivity {
 //                    Log.d("hello1","proffesion :" + proffesion);
 
                     if(proffesion.equals(SPpro)){
-                        ListSP2.add(fireSP);
+                        Log.d("hello1","name :" + name);
+                        ListSP2.add(0,fireSP);
+                        //ListSP2.add(fireSP);
                     }
+                    int temp3 = ListSP2.size();
+                    Log.d("hello1","after adding "+temp3);
                     //FireSP i = new FireSP(email,mobile,name,proffesion);
                 }
 
@@ -80,6 +84,8 @@ public class get_sp extends AppCompatActivity {
             };
             mRef.addValueEventListener(valueEventListener);
         }
+        int temp2 = ListSP2.size();
+        Log.d("hello1",""+temp2);
         FireSP temp;
         for(int i=0;i<ListSP2.size();i++){
             temp = ListSP2.get(i);
@@ -88,7 +94,7 @@ public class get_sp extends AppCompatActivity {
             mobile = temp.getMobile();
             proffesion = temp.getProffesion();
 
-            textView.append(name + email + mobile + proffesion);
+            textView.setText(name + email + mobile + proffesion);
             Log.d("hello1",name + email + mobile + proffesion);
         }
 
