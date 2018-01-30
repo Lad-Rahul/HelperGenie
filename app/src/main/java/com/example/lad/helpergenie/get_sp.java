@@ -1,5 +1,6 @@
 package com.example.lad.helpergenie;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -84,19 +85,18 @@ public class get_sp extends AppCompatActivity {
             };
             mRef.addValueEventListener(valueEventListener);
         }
-        int temp2 = ListSP2.size();
-        Log.d("hello1",""+temp2);
-        FireSP temp;
-        for(int i=0;i<ListSP2.size();i++){
-            temp = ListSP2.get(i);
-            name = temp.getName();
-            email = temp.getMobile();
-            mobile = temp.getMobile();
-            proffesion = temp.getProffesion();
-
-            textView.setText(name + email + mobile + proffesion);
-            Log.d("hello1",name + email + mobile + proffesion);
-        }
-
+//        int temp2 = ListSP2.size();
+//        Log.d("hello1",""+temp2);
+//        FireSP temp;
+//        for(int i=0;i<ListSP2.size();i++){
+//            temp = ListSP2.get(i);
+//            name = temp.getName();
+//            email = temp.getEmail();
+//            mobile = temp.getMobile();
+//            proffesion = temp.getProffesion();
+//
+//            textView.setText(name + email + mobile + proffesion);
+//            Log.d("hello1",name + email + mobile + proffesion);
+//        }
     }
 }
