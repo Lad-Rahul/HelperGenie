@@ -22,7 +22,8 @@
         <activity android:name=".TrialFirebase" />
         <activity android:name=".SignUpFormActivity" />
         <activity android:name=".get_sp" />
-        <activity android:name=".displaySP"></activity>
+        <activity android:name=".displaySP" />
+        <activity android:name=".displaySPmain"></activity>
     </application>
 
 </manifest>
