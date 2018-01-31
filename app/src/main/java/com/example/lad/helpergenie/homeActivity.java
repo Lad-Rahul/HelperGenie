@@ -131,7 +131,12 @@ public class homeActivity extends Fragment {
                 Intent intent = new Intent(getActivity(),get_sp.class);
                 intent.putStringArrayListExtra("Service Provider at this Location",pinObjectList);
                 intent.putExtra("Service Provider Proffesion",selectPro);
-                startActivity(intent);
+                if(searchPin.isSelected()) {
+                    startActivity(intent);
+                }
+                else{
+
+                }
             }
         });
 
