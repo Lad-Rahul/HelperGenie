@@ -85,6 +85,7 @@ public class displaySP extends AppCompatActivity {
                         go.putExtra("ratings",recRating);
                         go.putExtra("IDs",recID);
                         startActivity(go);
+                        finish();
                 }
 
                 }
