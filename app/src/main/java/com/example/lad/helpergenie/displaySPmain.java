@@ -11,7 +11,7 @@ public class displaySPmain extends AppCompatActivity {
     RecyclerView rv;
     recyclerSP ra;
 
-    String rec3Name[],rec3ID[],rec3Email[],rec3Mobile[];
+    String rec3Name[],rec3ID[],rec3Email[],rec3Mobile[],rec3Rating[];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +22,8 @@ public class displaySPmain extends AppCompatActivity {
         rec3Mobile = extra.getStringArray("mobiles");
         rec3Email = extra.getStringArray("emails");
         rec3Name = extra.getStringArray("names");
+        rec3Rating = extra.getStringArray("ratings");
+
 
         Log.e("Size","ID  "+rec3ID.length);
         Log.e("Size","EmailID "+rec3Email.length);

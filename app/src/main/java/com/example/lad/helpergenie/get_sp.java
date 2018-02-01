@@ -72,7 +72,7 @@ public class get_sp extends AppCompatActivity {
 
                     if(proffesion.equals(SPpro)){
                         Log.d("hello1","name :" + name);
-                        ListSP2.add(0,tempSP);
+                        ListSP2.add(tempSP);
                         //ListSP2.add(fireSP);
                     }
 
