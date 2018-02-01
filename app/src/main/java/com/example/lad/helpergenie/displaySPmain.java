@@ -33,7 +33,7 @@ public class displaySPmain extends AppCompatActivity {
 
         rv = (RecyclerView) findViewById(R.id.recyclerViewSP);
 
-        ra = new recyclerSP(this,rec3Name,rec3Email,rec3Mobile,rec3ID);
+        ra = new recyclerSP(this,rec3Name,rec3Email,rec3Mobile,rec3ID,rec3Rating);
         rv.setAdapter(ra);
         rv.setLayoutManager(new LinearLayoutManager(this));
     }

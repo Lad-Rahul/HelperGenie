@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.net.URI;
@@ -22,14 +23,15 @@ import java.net.URI;
 public class recyclerSP extends RecyclerView.Adapter<recyclerSP.HolderClass> {
 
     Context ct;
-    String name[],mobile[],email[],id[];
+    String name[],mobile[],email[],id[],rating[];
 
-    public recyclerSP(Context ctx,String dataname[],String dataemail[],String datamobile[],String dataid[]) {
+    public recyclerSP(Context ctx,String dataname[],String dataemail[],String datamobile[],String dataid[],String datarating[]) {
         ct = ctx;
         name = dataname;
         mobile = datamobile;
         email = dataemail;
         id = dataid;
+        rating = datarating;
     }
 
         @Override
@@ -46,6 +48,9 @@ public class recyclerSP extends RecyclerView.Adapter<recyclerSP.HolderClass> {
         holder.emailID.setText(email[position]);
         holder.mobile.setText(mobile[position]);
         holder.ID.setText(id[position]);
+        float ratingVal = Float.valueOf(rating[position]);
+        holder.ratingBar.setRating(ratingVal);
+        holder.ratingBar.setIsIndicator(true);
         holder.phoneCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,6 +69,7 @@ public class recyclerSP extends RecyclerView.Adapter<recyclerSP.HolderClass> {
 
         TextView name,emailID,mobile,ID;
         ImageView phoneCall;
+        RatingBar ratingBar;
 
         public HolderClass(View itemView) {
             super(itemView);
@@ -72,6 +78,7 @@ public class recyclerSP extends RecyclerView.Adapter<recyclerSP.HolderClass> {
             mobile = (TextView) itemView.findViewById(R.id.spMobile);
             ID = (TextView) itemView.findViewById(R.id.spID);
             phoneCall = (ImageView) itemView.findViewById(R.id.phoneCall);
+            ratingBar = (RatingBar)itemView.findViewById(R.id.ratingBar);
         }
     }
 
