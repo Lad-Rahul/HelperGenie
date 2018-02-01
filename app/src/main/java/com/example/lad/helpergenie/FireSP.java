@@ -10,17 +10,24 @@ public class FireSP {
     private String mobile;
     private String email;
     private String proffesion;
+    private String rating;
 
 
     public FireSP(){
 
     }
 
-    public FireSP(String email,String mobile,String name,String proffesion){
+
+
+
+
+
+    public FireSP(String email,String mobile,String name,String proffesion,String rating){
         this.email = email;
         this.mobile = mobile;
         this.name = name;
         this.proffesion = proffesion;
+        this.rating = rating;
     }
 
     public String getName() {
@@ -55,7 +62,13 @@ public class FireSP {
         this.proffesion = proffesion;
     }
 
+    public String getRating() {
+        return rating;
+    }
 
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
 
 
 

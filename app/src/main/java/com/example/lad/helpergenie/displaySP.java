@@ -19,11 +19,12 @@ import java.util.ArrayList;
 public class displaySP extends AppCompatActivity {
 
 
-    String recName[],recID[],recEmail[],recMobile[];
+    String recName[],recID[],recEmail[],recMobile[],recRating[];
     ArrayList<String> rec2Name = new ArrayList<>();
     ArrayList<String> rec2ID = new ArrayList<>();
     ArrayList<String> rec2Email = new ArrayList<>();
     ArrayList<String> rec2Mobile = new ArrayList<>();
+    ArrayList<String> rec2Rating = new ArrayList<>();
     private FirebaseDatabase mData;
     private DatabaseReference mRef;
 
@@ -58,6 +59,7 @@ public class displaySP extends AppCompatActivity {
                     rec2Name.add(fireSP.getName());
                     rec2Email.add(fireSP.getEmail());
                     rec2Mobile.add(fireSP.getMobile());
+                    rec2Rating.add(fireSP.getRating());
                     rec2ID.add(temp);
 
                     Log.d("test",""+ finalI + " " + rec2Name.get(finalI));
@@ -66,18 +68,21 @@ public class displaySP extends AppCompatActivity {
                         recName = new String[rec2Name.size()];
                         recMobile = new String[rec2Mobile.size()];
                         recEmail = new String[rec2Email.size()];
+                        recRating = new String[rec2Email.size()];
                         recID = new String[rec2Name.size()];
                         Log.d("test",""+  "rec2name " + rec2Name.size());
                         for(int j=0;j < rec2Name.size();j++) {
                             recName[j] = rec2Name.get(j);
                             recEmail[j] = rec2Email.get(j);
                             recMobile[j] = rec2Mobile.get(j);
+                            recRating[j] = rec2Rating.get(j);
                             recID[j] = rec2ID.get(j);
                         }
                         Intent go = new Intent(displaySP.this,displaySPmain.class);
                         go.putExtra("names",recName);
                         go.putExtra("emails",recEmail);
                         go.putExtra("mobiles",recMobile);
+                        go.putExtra("ratings",recRating);
                         go.putExtra("IDs",recID);
                         startActivity(go);
                 }
