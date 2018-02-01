@@ -27,7 +27,7 @@ public class get_sp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_sp);
 
-        textView = (TextView)findViewById(R.id.textView2);
+
 
         final ArrayList<String> ListSP2 = new ArrayList<>();
         ArrayList<String> ListSP = new ArrayList<>();
@@ -80,6 +80,7 @@ public class get_sp extends AppCompatActivity {
                         Intent intent=new Intent(get_sp.this,displaySP.class);
                         intent.putExtra("Service providers selected",ListSP2);
                         startActivity(intent);
+                        finish();
                     }
                     //FireSP i = new FireSP(email,mobile,name,proffesion);
                 }
