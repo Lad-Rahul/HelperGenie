@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,10 +50,7 @@ public class MainActivity extends AppCompatActivity
     public static String CurrUser;
     public static String MainCurrUserEmail;
     public ImageView mProfileImage;
-    public final int SELECTING_IMAGE = 100;
 
-    FirebaseStorage mStorageRef;
-    StorageReference mPictures;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +59,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mStorageRef = FirebaseStorage.getInstance();
         mProfileImage = (ImageView)findViewById(R.id.edit);
-        mPictures = mStorageRef.getReference().child("users_pic");
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -96,23 +92,6 @@ public class MainActivity extends AppCompatActivity
         }else if (requestCode == RC_SIGN_IN && resultCode == RESULT_CANCELED) {
             finish();
         }
-//        else if (requestCode == SELECTING_IMAGE && resultCode == RESULT_OK){
-//            Toast.makeText(MainActivity.this, " Succesfully Selected Image", Toast.LENGTH_SHORT).show();
-//            Uri uri = data.getData();
-//            StorageReference profilePic = mPictures.child(MainCurrUserEmail.replace(".",""));
-//            profilePic.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                @Override
-//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                    Toast.makeText(MainActivity.this, "Uploaded Image", Toast.LENGTH_SHORT).show();
-//                    Uri downloadPic = taskSnapshot.getDownloadUrl();
-//                    ////////////////////Wprk in progress///////////////////////////////////
-//                    //////////////////////////////////////////////////////////////////////
-//                    ///////////////////ProfileActivity pf = new ProfileActivity(downloadPic);
-//                }
-//            });
-//        } else if (requestCode == SELECTING_IMAGE && resultCode == RESULT_CANCELED){
-//            Toast.makeText(this, "Error Selecting Image", Toast.LENGTH_SHORT).show();
-//        }
     }
 
     @Override

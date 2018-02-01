@@ -21,6 +21,7 @@
             android:src="@drawable/nav_menu_header_bg_300x170"
             app:srcCompat="@drawable/nav_menu_header_bg_300x170" />
 
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_picture"
             android:layout_width="200dp"
@@ -35,6 +36,20 @@
             android:elevation="5dp"
             android:layout_marginTop="-105dp"
             android:layout_below="@id/header_cover_image"/>
+
+        <!--<ImageView-->
+            <!--android:id="@+id/profile_picture"-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="200dp"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:src="@drawable/man"-->
+            <!--android:clickable="true"-->
+            <!--android:scaleType="centerCrop"-->
+            <!--android:padding="20dp"-->
+            <!--android:elevation="5dp"-->
+            <!--android:layout_marginTop="-105dp"-->
+            <!--android:layout_below="@id/header_cover_image"/>-->
+
 
         <RelativeLayout
             android:id="@+id/profile_layout"

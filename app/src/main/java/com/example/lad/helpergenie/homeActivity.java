@@ -128,15 +128,17 @@ public class homeActivity extends Fragment {
         BtngetSP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),get_sp.class);
-                intent.putStringArrayListExtra("Service Provider at this Location",pinObjectList);
-                intent.putExtra("Service Provider Proffesion",selectPro);
-                startActivity(intent);
-//                if(searchPin.isSelected()) {
-//                }
-//                else{
-//
-//                }
+               if(searchPin.getSelectedItem() == null) {
+               }else{
+               Intent intent = new Intent(getActivity(),get_sp.class);
+               intent.putStringArrayListExtra("Service Provider at this Location",pinObjectList);
+               intent.putExtra("Service Provider Proffesion",selectPro);
+               startActivity(intent);
+//               if(searchPin.isSelected()) {
+//               }
+//               else{
+////            }
+            }
             }
         });
 

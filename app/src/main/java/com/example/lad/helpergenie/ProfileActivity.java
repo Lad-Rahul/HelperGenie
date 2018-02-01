@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -17,6 +18,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +29,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.net.URI;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
 
 
 /**
@@ -40,9 +55,14 @@ public class ProfileActivity extends Fragment {
     private DatabaseReference mRef;
     private String name,email,pincode,address1,address2,mobile;
     private ImageView mProfileImage;
-    private final int SELECTING_IMAGE = 100;
+    public static CircleImageView mProfilePicture;
+    //public static ImageView mProfilePicture;
+    public final int SELECTING_IMAGE = 100;
     FirebaseAuth auth = FirebaseAuth.getInstance();
-    private Uri downloadPic;
+    public static Uri downloadPic;
+
+    FirebaseStorage mStorageRef;
+    StorageReference mPictures;
 
     View mView;
 
@@ -65,6 +85,12 @@ public class ProfileActivity extends Fragment {
         mProfileImage = (ImageView)mView.findViewById(R.id.edit);
 
         mData = FirebaseDatabase.getInstance();
+        mStorageRef = FirebaseStorage.getInstance();
+        mPictures = mStorageRef.getReference().child("users_pic");
+
+        mProfilePicture = (CircleImageView) mView.findViewById(R.id.profile_picture);
+
+        //mProfilePicture = (ImageView) mView.findViewById(R.id.profile_picture);
 
         FirebaseUser user = auth.getCurrentUser();
         String currUserEmail = "";
@@ -106,6 +132,8 @@ public class ProfileActivity extends Fragment {
 
                 pd.cancel();
 
+
+
                 Log.d("Debugging : ","name is "+name);
                 Log.d("Debugging : ","Email is "+email);
                 Log.d("Debugging : ","Pincode is "+pincode);
@@ -126,9 +154,54 @@ public class ProfileActivity extends Fragment {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                getActivity().startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECTING_IMAGE);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECTING_IMAGE);
             }
         });
+
+        mPictures.child(MainActivity.MainCurrUserEmail.replace(".","")).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(getActivity()).load(downloadPic).into(mProfilePicture);
+            }
+        });
+
         return mView;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        mStorageRef = FirebaseStorage.getInstance();
+        mPictures = mStorageRef.getReference().child("users_pic");
+
+        if (requestCode == SELECTING_IMAGE && resultCode == RESULT_OK){
+            Log.d("Image Retrive","Selected Image");
+            Toast.makeText(getActivity(), " Succesfully Selected Image", Toast.LENGTH_SHORT).show();
+            Uri uri = data.getData();
+            StorageReference profilePic = mPictures.child(MainActivity.MainCurrUserEmail.replace(".",""));
+            profilePic.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Log.d("Image Retrive","Uploading Image");
+                    Toast.makeText(getActivity(), "Uploaded Image", Toast.LENGTH_SHORT).show();
+                    Uri downloadPic = taskSnapshot.getDownloadUrl();
+                    Log.d("Image Retrive","Uri is "+downloadPic);
+                    //Glide.with(Fr).load(downloadPic).into(mProfilePicture);
+                    Glide.with(getActivity()).load(downloadPic).into(mProfilePicture);
+                    Toast.makeText(getActivity(), "Sucessfully set Picture", Toast.LENGTH_SHORT).show();
+                    Log.d("Image Retrive","Set Image Sucessfull");
+
+                    ////////////////////Wprk in progress///////////////////////////////////
+                    //////////////////////////////////////////////////////////////////////
+                    ///////////////////ProfileActivity pf = new ProfileActivity(downloadPic);
+                }
+
+            });
+        } else if (requestCode == SELECTING_IMAGE && resultCode == RESULT_CANCELED){
+            Toast.makeText(getActivity(), "Error Selecting Image", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }
