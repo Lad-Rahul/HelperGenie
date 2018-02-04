@@ -43,7 +43,7 @@ public class homeActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.layout_home,container,false);
 
-        String[] listSP = {"plumber" , "electician" , "carpenter" };
+        String[] listSP = {"plumber" , "electrician" , "carpenter" };
         searchSP = (Spinner)mView.findViewById(R.id.search_sp);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,listSP);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
