@@ -35,17 +35,17 @@ public class about_us extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.about_us_layout,container,false);
+        mView = inflater.inflate(R.layout.about_us_new,container,false);
         getActivity().setTitle("About us");
 
-        expList = (ExpandableListView)mView.findViewById(R.id.expList_aboutus);
-        expHeader = expAdapter.DataProvider.getInfo();
-        expChild = new ArrayList<String>(expHeader.keySet());
-        //java.util.Collections.sort(expChild);   //for right order of list
-        adapter = new expAdapter(LayoutInflater.from(getActivity()),expHeader,expChild);
-        expList.setAdapter(adapter);
-
-
+//        expList = (ExpandableListView)mView.findViewById(R.id.expList_aboutus);
+//        expHeader = expAdapter.DataProvider.getInfo();
+//        expChild = new ArrayList<String>(expHeader.keySet());
+//        //java.util.Collections.sort(expChild);   //for right order of list
+//        adapter = new expAdapter(LayoutInflater.from(getActivity()),expHeader,expChild);
+//        expList.setAdapter(adapter);
+//
+//
         return mView;
     }
 }
