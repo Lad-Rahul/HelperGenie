@@ -12,6 +12,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,11 +20,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TrialFirebase" />
-        <activity android:name=".SignUpFormActivity" />
-        <activity android:name=".get_sp" />
-        <activity android:name=".displaySP" />
-        <activity android:name=".displaySPmain"></activity>
+        <activity android:name=".TrialFirebase"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SignUpFormActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".get_sp"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".displaySP"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".displaySPmain"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
