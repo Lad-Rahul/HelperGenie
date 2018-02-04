@@ -1,11 +1,15 @@
 package com.example.lad.helpergenie;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -15,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class displaySP extends AppCompatActivity {
 
@@ -27,89 +32,88 @@ public class displaySP extends AppCompatActivity {
     ArrayList<String> rec2Rating = new ArrayList<>();
     private FirebaseDatabase mData;
     private DatabaseReference mRef;
+    private ProgressBar progressBar;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_display_sp);
+
         Bundle extra=getIntent().getExtras();
         ArrayList<String> ListSelSP=new ArrayList<>();
         ListSelSP =extra.getStringArrayList("Service providers selected");
+
         for(int i=0;i<ListSelSP.size();i++){
             Log.d("aa",ListSelSP.get(i).toString());
-            //Toast.makeText(displaySP.this,ListSelSP.get(i).toString(),Toast.LENGTH_SHORT).show();
         }
         int temp2=ListSelSP.size();
         Log.d("hh",""+temp2);
 
-        mData = FirebaseDatabase.getInstance();
-
-        for(int i = 0; i<ListSelSP.size(); i++){
-
-            final String temp = ListSelSP.get(i);
-            mRef = mData.getReference().child("service-provider").child(temp);
-
-            final int finalI = i;
-            final ArrayList<String> finalListSelSP = ListSelSP;
-            ValueEventListener valueEventListener = new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                    FireSP fireSP = dataSnapshot.getValue(FireSP.class);
-                    rec2Name.add(fireSP.getName());
-                    rec2Email.add(fireSP.getEmail());
-                    rec2Mobile.add(fireSP.getMobile());
-                    rec2Rating.add(fireSP.getRating());
-                    rec2ID.add(temp);
-
-                    Log.d("test",""+ finalI + " " + rec2Name.get(finalI));
-
-                    if(finalI == finalListSelSP.size() - 1){
-                        recName = new String[rec2Name.size()];
-                        recMobile = new String[rec2Mobile.size()];
-                        recEmail = new String[rec2Email.size()];
-                        recRating = new String[rec2Email.size()];
-                        recID = new String[rec2Name.size()];
-                        Log.d("test",""+  "rec2name " + rec2Name.size());
-                        for(int j=0;j < rec2Name.size();j++) {
-                            recName[j] = rec2Name.get(j);
-                            recEmail[j] = rec2Email.get(j);
-                            recMobile[j] = rec2Mobile.get(j);
-                            recRating[j] = rec2Rating.get(j);
-                            recID[j] = rec2ID.get(j);
-                        }
-                        Intent go = new Intent(displaySP.this,displaySPmain.class);
-                        go.putExtra("names",recName);
-                        go.putExtra("emails",recEmail);
-                        go.putExtra("mobiles",recMobile);
-                        go.putExtra("ratings",recRating);
-                        go.putExtra("IDs",recID);
-                        startActivity(go);
-                        finish();
-                }
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            };
-            mRef.addValueEventListener(valueEventListener);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar2);
+        textView = (TextView)findViewById(R.id.Loading2);
+        if(ListSelSP.size() == 0){
+            progressBar.setVisibility(View.INVISIBLE);
+            textView.setText("Service unavailable");
         }
+        else {
 
+            mData = FirebaseDatabase.getInstance();
 
-//        recEmail = new String[]{"Email 1", "Email 2"};
-//        recID = new String[]{"ID1", "ID2"};
-//        recMobile = new String[]{"Mobile 1", "Mobile 2"};
-//        recName = new String[]{"Namem 1", "Name 2"};
-//        //String data[] = {"dsd","dwdw","dwd"};
+            for (int i = 0; i < ListSelSP.size(); i++) {
 
+                final String temp = ListSelSP.get(i);
+                mRef = mData.getReference().child("service-provider").child(temp);
 
+                final int finalI = i;
+                final ArrayList<String> finalListSelSP = ListSelSP;
+                ValueEventListener valueEventListener = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
+                        FireSP fireSP = dataSnapshot.getValue(FireSP.class);
+                        rec2Name.add(fireSP.getName());
+                        rec2Email.add(fireSP.getEmail());
+                        rec2Mobile.add(fireSP.getMobile());
+                        rec2Rating.add(fireSP.getRating());
+                        rec2ID.add(temp);
 
+                        Log.d("test", "" + finalI + " " + rec2Name.get(finalI));
+
+                        if (finalI == finalListSelSP.size() - 1) {
+                            recName = new String[rec2Name.size()];
+                            recMobile = new String[rec2Mobile.size()];
+                            recEmail = new String[rec2Email.size()];
+                            recRating = new String[rec2Email.size()];
+                            recID = new String[rec2Name.size()];
+                            Log.d("test", "" + "rec2name " + rec2Name.size());
+                            for (int j = 0; j < rec2Name.size(); j++) {
+                                recName[j] = rec2Name.get(j);
+                                recEmail[j] = rec2Email.get(j);
+                                recMobile[j] = rec2Mobile.get(j);
+                                recRating[j] = rec2Rating.get(j);
+                                recID[j] = rec2ID.get(j);
+                            }
+                            Intent go = new Intent(displaySP.this, displaySPmain.class);
+                            go.putExtra("names", recName);
+                            go.putExtra("emails", recEmail);
+                            go.putExtra("mobiles", recMobile);
+                            go.putExtra("ratings", recRating);
+                            go.putExtra("IDs", recID);
+                            startActivity(go);
+                            finish();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                };
+                mRef.addValueEventListener(valueEventListener);
+            }
+        }
     }
-
-
-
 }
