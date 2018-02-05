@@ -22,14 +22,7 @@ public class HelpActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.activity_help,container,false);
 
-        Button btn = (Button)mView.findViewById(R.id.button2);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),SignUpFormActivity.class);
-                startActivity(intent);
-            }
-        });
+
         return mView;
     }
 }
