@@ -10,4 +10,6 @@
     <string name="about_us">About us</string>
     <string name="app_copyright">copyright@2018</string>
 
+    <string name ="q1" >Why my Pincode is not here?</string>
+    <string name="a1">It is because our service is not available there.</string>
 </resources>

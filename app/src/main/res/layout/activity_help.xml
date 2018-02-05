@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:padding="4dp"
             android:textSize="16dp"
             android:textStyle="bold"
-            android:text="TextView" />
+            android:text="@string/q1" />
 
         <TextView
             android:id="@+id/text_a1"
@@ -30,7 +30,8 @@
             android:layout_height="wrap_content"
             android:padding="4dp"
             android:textSize="16dp"
-            android:text="TextView" />
+            android:textColor="#000000"
+            android:text="@string/a1" />
     </LinearLayout>
 
 
@@ -55,6 +56,7 @@
             android:layout_height="wrap_content"
             android:padding="4dp"
             android:textSize="16dp"
+            android:textColor="#000000"
             android:text="TextView" />
     </LinearLayout>
 
@@ -80,6 +82,7 @@
             android:layout_height="wrap_content"
             android:padding="4dp"
             android:textSize="16dp"
+            android:textColor="#000000"
             android:text="TextView" />
     </LinearLayout>
 
@@ -105,6 +108,7 @@
             android:layout_height="wrap_content"
             android:padding="4dp"
             android:textSize="16dp"
+            android:textColor="#000000"
             android:text="TextView" />
     </LinearLayout>
 
@@ -130,6 +134,7 @@
             android:layout_height="wrap_content"
             android:padding="4dp"
             android:textSize="16dp"
+            android:textColor="#000000"
             android:text="TextView" />
     </LinearLayout>
 
@@ -155,6 +160,7 @@
             android:layout_height="wrap_content"
             android:padding="4dp"
             android:textSize="16dp"
+            android:textColor="#000000"
             android:text="TextView" />
     </LinearLayout>
     </LinearLayout>
