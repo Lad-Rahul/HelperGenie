@@ -1,6 +1,7 @@
 package com.example.lad.helpergenie;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -62,8 +63,12 @@ public class homeActivity extends Fragment {
             }
         });
 
-
-
+        final ProgressDialog pd = new ProgressDialog(getActivity());
+        pd.setTitle("Please wait");
+        pd.setMessage("Fetching Available Pincodes");
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setCancelable(false);
+        pd.show();
 
 
         final ArrayList<String> pinObjectList = new ArrayList<>();
@@ -106,6 +111,12 @@ public class homeActivity extends Fragment {
 //                            Map SingleUser = (Map)entry.getValue();
 //                            pinObjectList.add(SingleUser);
 
+                        }
+
+                        if(searchPin.getCount() == 0){
+
+                        }else{
+                            pd.dismiss();
                         }
                     }
 

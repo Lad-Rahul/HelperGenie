@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity
     public static String CurrUser;
     public static String MainCurrUserEmail;
     public ImageView mProfileImage;
+    NavigationView navigationView;
 
 
     @Override
@@ -79,8 +80,9 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(0);
         fragmentManager =  getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new homeActivity()).commit();
 
@@ -166,8 +168,14 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+
         } else {
-            super.onBackPressed();
+            if(navigationView.getMenu().getItem(0).isChecked() == false){
+                fragmentManager =  getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new homeActivity()).commit();
+            }else{
+                super.onBackPressed();
+            }
         }
     }
 
