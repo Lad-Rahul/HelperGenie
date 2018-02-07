@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/bkgpic"
     android:layout_height="match_parent">
 
     <ImageView
@@ -27,6 +28,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/bkg_home"
         app:layout_constraintTop_toBottomOf="@+id/imageView3">
 
         <android.support.constraint.ConstraintLayout
