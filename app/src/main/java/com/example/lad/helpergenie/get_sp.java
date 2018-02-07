@@ -22,6 +22,7 @@ public class get_sp extends AppCompatActivity {
     private FirebaseDatabase mData;
     private DatabaseReference mRef;
     private String name,proffesion,email,mobile,SPpro;
+    private int ordercomplete;
     private TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class get_sp extends AppCompatActivity {
                     email = fireSP.getEmail();
                     mobile = fireSP.getMobile();
                     proffesion = fireSP.getProffesion();
+                    ordercomplete = fireSP.getOrdercomplete();
 
 //                    Log.d("hello1","name :" + name);
 //                    Log.d("hello1","email :" + email);

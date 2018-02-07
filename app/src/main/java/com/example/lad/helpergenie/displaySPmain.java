@@ -13,6 +13,7 @@ public class displaySPmain extends AppCompatActivity {
     recyclerSP ra;
 
     String rec3Name[],rec3ID[],rec3Email[],rec3Mobile[],rec3Rating[];
+    int rec3ordercomplete[];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +26,7 @@ public class displaySPmain extends AppCompatActivity {
         rec3Email = extra.getStringArray("emails");
         rec3Name = extra.getStringArray("names");
         rec3Rating = extra.getStringArray("ratings");
+        rec3ordercomplete = extra.getIntArray("ordercomplete");
 
 
         Log.e("Size","ID  "+rec3ID.length);
@@ -35,7 +37,7 @@ public class displaySPmain extends AppCompatActivity {
 
         rv = (RecyclerView) findViewById(R.id.recyclerViewSP);
 
-        ra = new recyclerSP(this,rec3Name,rec3Email,rec3Mobile,rec3ID,rec3Rating);
+        ra = new recyclerSP(this,rec3Name,rec3Email,rec3Mobile,rec3ID,rec3Rating,rec3ordercomplete);
         rv.setAdapter(ra);
         rv.setLayoutManager(new LinearLayoutManager(this));
     }

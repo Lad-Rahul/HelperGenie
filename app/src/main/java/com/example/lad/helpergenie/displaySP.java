@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,17 +16,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class displaySP extends AppCompatActivity {
 
 
     String recName[],recID[],recEmail[],recMobile[],recRating[];
+    int recordercomplete[];
     ArrayList<String> rec2Name = new ArrayList<>();
     ArrayList<String> rec2ID = new ArrayList<>();
     ArrayList<String> rec2Email = new ArrayList<>();
     ArrayList<String> rec2Mobile = new ArrayList<>();
     ArrayList<String> rec2Rating = new ArrayList<>();
+    ArrayList<Integer> rec2ordercomplete = new ArrayList<>();
     private FirebaseDatabase mData;
     private DatabaseReference mRef;
     private ProgressBar progressBar;
@@ -78,6 +76,7 @@ public class displaySP extends AppCompatActivity {
                         rec2Mobile.add(fireSP.getMobile());
                         rec2Rating.add(fireSP.getRating());
                         rec2ID.add(temp);
+                        rec2ordercomplete.add(fireSP.getOrdercomplete());
 
                         Log.d("test", "" + finalI + " " + rec2Name.get(finalI));
 
@@ -87,6 +86,8 @@ public class displaySP extends AppCompatActivity {
                             recEmail = new String[rec2Email.size()];
                             recRating = new String[rec2Email.size()];
                             recID = new String[rec2Name.size()];
+                            recordercomplete = new int[rec2ordercomplete.size()];
+
                             Log.d("test", "" + "rec2name " + rec2Name.size());
                             for (int j = 0; j < rec2Name.size(); j++) {
                                 recName[j] = rec2Name.get(j);
@@ -94,6 +95,7 @@ public class displaySP extends AppCompatActivity {
                                 recMobile[j] = rec2Mobile.get(j);
                                 recRating[j] = rec2Rating.get(j);
                                 recID[j] = rec2ID.get(j);
+                                recordercomplete[j] = rec2ordercomplete.get(j);
                             }
                             Intent go = new Intent(displaySP.this, displaySPmain.class);
                             go.putExtra("names", recName);
@@ -101,6 +103,7 @@ public class displaySP extends AppCompatActivity {
                             go.putExtra("mobiles", recMobile);
                             go.putExtra("ratings", recRating);
                             go.putExtra("IDs", recID);
+                            go.putExtra("ordercomplete", recordercomplete);
                             startActivity(go);
                             finish();
                         }

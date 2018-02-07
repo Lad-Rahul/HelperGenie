@@ -11,23 +11,20 @@ public class FireSP {
     private String email;
     private String proffesion;
     private String rating;
+    private int ordercomplete;
 
 
     public FireSP(){
 
     }
 
-
-
-
-
-
-    public FireSP(String email,String mobile,String name,String proffesion,String rating){
+    public FireSP(String email,String mobile,String name,String proffesion,String rating,int ordercomplete){
         this.email = email;
         this.mobile = mobile;
         this.name = name;
         this.proffesion = proffesion;
         this.rating = rating;
+        this.ordercomplete = ordercomplete;
     }
 
     public String getName() {
@@ -70,6 +67,11 @@ public class FireSP {
         this.rating = rating;
     }
 
+    public int getOrdercomplete() {
+        return ordercomplete;
+    }
 
-
+    public void setOrdercomplete(int ordercomplete) {
+        this.ordercomplete = ordercomplete;
+    }
 }
