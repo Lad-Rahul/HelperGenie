@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -38,6 +39,11 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URI;
+import java.nio.channels.FileChannel;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity
@@ -226,10 +232,18 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
             ApplicationInfo api = getApplicationContext().getApplicationInfo();
             String apkPath = api.sourceDir;
+            copy(new File(apkPath),new File("/storage/self/primary/Download/base.apk"));
             Intent share = new Intent(Intent.ACTION_SEND);
-            share.setType("application/vnd.android.package-archive");
-            share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(apkPath)));
-            startActivity(Intent.createChooser(share,"Start Using..."));
+            share.setType("*/*");
+            share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            share.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            //Uri shareURI = new Uri(""+Uri.fromFile(new File(apkPath)).toString().replace("file","content"));
+            //Uri shareURI = FileProvider.getUriForFile(this, "provyas.my.package.name.provider", new File(apkPath));
+            //Uri shareURI = Uri.parse("content://"+apkPath);
+            //share.putExtra(Intent.EXTRA_STREAM, shareURI);
+            //share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(apkPath)));
+            //share.putExtra(Intent.EXTRA_STREAM, shareURI);
+            //startActivity(Intent.createChooser(share,"Start Using..."));
 
         }else if (id == R.id.nav_aboutus) {
             fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new about_us()).commit();
@@ -239,4 +253,20 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public static void copy(File src, File dst){
+        try {
+            FileInputStream inStream = new FileInputStream(src);
+            FileOutputStream outStream = new FileOutputStream(dst);
+            FileChannel inChannel = inStream.getChannel();
+            FileChannel outChannel = outStream.getChannel();
+            inChannel.transferTo(0, inChannel.size(), outChannel);
+            inStream.close();
+            outStream.close();
+        }catch (IOException e){
+            Log.d("Copying Your File", "Can not Copy");
+        }
+
+    }
+
 }

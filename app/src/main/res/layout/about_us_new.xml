@@ -22,13 +22,13 @@
         app:srcCompat="@drawable/nav_menu_header_bg_300x170" />
 
     <ScrollView
-        android:layout_width="368dp"
-        android:layout_height="309dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/bkg_home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/bkg_home"
         app:layout_constraintTop_toBottomOf="@+id/imageView3">
 
         <android.support.constraint.ConstraintLayout
