@@ -12,4 +12,16 @@
 
     <string name ="q1" >Why my Pincode is not here?</string>
     <string name="a1">It is because our service is not available there.</string>
+
+    <string name = "q2">How can I be the Service-Provider at HelperGenie?</string>
+    <string name="a2">In About us , you can get Contact to us . We tell Procedure for test and appropriate documents you need.</string>
+
+    <string name="q3">How can identify that the Service-Provider is from HelperGenie?</string>
+    <string name="a3">Our Service-Provider has ID-card with QR-code to recognize.</string>
+
+    <string name="q4">What is minimum version of Android required?</string>
+    <string name="a4">Kitkat - 4.4.4</string>
+
+
+
 </resources>
