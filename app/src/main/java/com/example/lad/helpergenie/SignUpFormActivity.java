@@ -66,19 +66,19 @@ public class SignUpFormActivity extends AppCompatActivity {
                 String tadd2 = Fadd2.getText().toString();
                 String tpin = Fpin.getText().toString();
                 if( tmobile.matches("")){
-                    Toast.makeText(SignUpFormActivity.this,"Write Mobile No",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SignUpFormActivity.this,"Write Mobile No",Toast.LENGTH_SHORT).show();
                 }
                 else if(tadd1.matches("")){
-                    Toast.makeText(SignUpFormActivity.this,"Write Address line 1",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SignUpFormActivity.this,"Write Address line 1",Toast.LENGTH_SHORT).show();
                 }
                 else if(tadd2.matches("")){
-                    Toast.makeText(SignUpFormActivity.this,"Write Address line 2",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SignUpFormActivity.this,"Write Address line 2",Toast.LENGTH_SHORT).show();
                 }
                 else if(tpin.matches("")){
-                    Toast.makeText(SignUpFormActivity.this,"Write Pincode",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SignUpFormActivity.this,"Write Pincode",Toast.LENGTH_SHORT).show();
                 }
                 else if(tpin.length() != 6){
-                    Toast.makeText(SignUpFormActivity.this,"Enter Proper Pincode",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SignUpFormActivity.this,"Enter Proper Pincode",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     sendData();
@@ -98,22 +98,22 @@ public class SignUpFormActivity extends AppCompatActivity {
 
         mRef = mData.getReference().child("users").child(userKey).child("address");
         mRef.setValue(add1);
-        Toast.makeText(SignUpFormActivity.this,"Sending "+add1,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SignUpFormActivity.this,"Sending "+add1,Toast.LENGTH_SHORT).show();
         mRef = mData.getReference().child("users").child(userKey).child("address2");
         mRef.setValue(add2);
-        Toast.makeText(SignUpFormActivity.this,"Sending "+add2,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SignUpFormActivity.this,"Sending "+add2,Toast.LENGTH_SHORT).show();
         mRef = mData.getReference().child("users").child(userKey).child("email");
         mRef.setValue(userEmail);
-        Toast.makeText(SignUpFormActivity.this,"Sending "+userEmail,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SignUpFormActivity.this,"Sending "+userEmail,Toast.LENGTH_SHORT).show();
         mRef = mData.getReference().child("users").child(userKey).child("mobile");
         mRef.setValue(mobile);
-        Toast.makeText(SignUpFormActivity.this,"Sending "+mobile,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SignUpFormActivity.this,"Sending "+mobile,Toast.LENGTH_SHORT).show();
         mRef = mData.getReference().child("users").child(userKey).child("name");
         mRef.setValue(userName);
-        Toast.makeText(SignUpFormActivity.this,"Sending "+userName,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SignUpFormActivity.this,"Sending "+userName,Toast.LENGTH_SHORT).show();
         mRef = mData.getReference().child("users").child(userKey).child("pincode");
         mRef.setValue(pin);
-        Toast.makeText(SignUpFormActivity.this,"Sending "+pin,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SignUpFormActivity.this,"Sending "+pin,Toast.LENGTH_SHORT).show();
         finish();
     }
 

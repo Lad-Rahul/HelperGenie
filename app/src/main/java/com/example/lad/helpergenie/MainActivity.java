@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN && resultCode == RESULT_OK){
-            Toast.makeText(MainActivity.this, " Succesfully Signed in", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, " Succesfully Signed in", Toast.LENGTH_SHORT).show();
         }else if (requestCode == RC_SIGN_IN && resultCode == RESULT_CANCELED) {
             finish();
         }
@@ -123,8 +123,8 @@ public class MainActivity extends AppCompatActivity
         FirebaseUser user = auth.getCurrentUser();
         if (user != null) {
             // signed In
-            Toast.makeText(MainActivity.this, "User EmailId is "+user.getEmail().toString(), Toast.LENGTH_SHORT).show();
-            Toast.makeText(MainActivity.this, user.getDisplayName()+" is Logged in !", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "User EmailId is "+user.getEmail().toString(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, user.getDisplayName()+" is Logged in !", Toast.LENGTH_SHORT).show();
             CurrUser = user.getDisplayName();
             MainCurrUserEmail = user.getEmail().toString();
             //pd2.dismiss();
@@ -141,6 +141,7 @@ public class MainActivity extends AppCompatActivity
                             .setIsSmartLockEnabled(false)
                             .build(),
                     RC_SIGN_IN);
+
         }
 
         navigationView.getMenu().getItem(0).setChecked(true);
@@ -187,6 +188,7 @@ public class MainActivity extends AppCompatActivity
             if(navigationView.getMenu().getItem(0).isChecked() == false){
                 fragmentManager =  getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new homeActivity()).commit();
+                //fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new firsttime()).commit();
                 navigationView.getMenu().getItem(0).setChecked(true);
             }else{
                 super.onBackPressed();
@@ -210,7 +212,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.action_logout) {
             AuthUI.getInstance().signOut(this);
-            Toast.makeText(MainActivity.this, "Sucessfully LoggedOut", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "Sucessfully LoggedOut", Toast.LENGTH_SHORT).show();
             onResume();
             return true;
         }
@@ -235,7 +237,7 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new HelpActivity()).commit();
         } else if (id == R.id.nav_logout) {
             AuthUI.getInstance().signOut(MainActivity.this);
-            Toast.makeText(MainActivity.this, "Sucessfully LoggedOut", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "Sucessfully LoggedOut", Toast.LENGTH_SHORT).show();
             //finish();
             onResume();
         } else if (id == R.id.nav_share) {

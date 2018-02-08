@@ -98,7 +98,7 @@ public class ProfileActivity extends Fragment {
         if (user != null) {
             // signed In
             currUserEmail = user.getEmail().toString().replace(".","").trim();
-            Toast.makeText(getActivity(),"Current email is "+ currUserEmail +".",Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity(),"Current email is "+ currUserEmail +".",Toast.LENGTH_LONG).show();
         } else {
             // not signed in
         }
@@ -111,17 +111,17 @@ public class ProfileActivity extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 FireUser fireUser = dataSnapshot.getValue(FireUser.class);
                 name = fireUser.getName();
-                Toast.makeText(getActivity(), "Username is "+name, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Username is "+name, Toast.LENGTH_SHORT).show();
                 email = fireUser.getEmail();
-                Toast.makeText(getActivity(), "Email is "+email, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Email is "+email, Toast.LENGTH_SHORT).show();
                 pincode = fireUser.getPincode();
-                Toast.makeText(getActivity(), "Pincode is "+pincode, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Pincode is "+pincode, Toast.LENGTH_SHORT).show();
                 address1 = fireUser.getAddress();
-                Toast.makeText(getActivity(), "Address1 is "+address1, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Address1 is "+address1, Toast.LENGTH_SHORT).show();
                 address2 = fireUser.getAddress2();
-                Toast.makeText(getActivity(), "Address2 is "+address2, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Address2 is "+address2, Toast.LENGTH_SHORT).show();
                 mobile = fireUser.getMobile();
-                Toast.makeText(getActivity(), "Mobile is "+mobile, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Mobile is "+mobile, Toast.LENGTH_SHORT).show();
 
 
                 mEmailTextView.setText(email);
@@ -179,19 +179,19 @@ public class ProfileActivity extends Fragment {
 
         if (requestCode == SELECTING_IMAGE && resultCode == RESULT_OK){
             Log.d("Image Retrive","Selected Image");
-            Toast.makeText(getActivity(), " Succesfully Selected Image", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), " Succesfully Selected Image", Toast.LENGTH_SHORT).show();
             Uri uri = data.getData();
             StorageReference profilePic = mPictures.child(MainActivity.MainCurrUserEmail.replace(".",""));
             profilePic.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Log.d("Image Retrive","Uploading Image");
-                    Toast.makeText(getActivity(), "Uploaded Image", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "Uploaded Image", Toast.LENGTH_SHORT).show();
                     Uri downloadPic = taskSnapshot.getDownloadUrl();
                     Log.d("Image Retrive","Uri is "+downloadPic);
                     //Glide.with(Fr).load(downloadPic).into(mProfilePicture);
                     Glide.with(getActivity()).load(downloadPic).into(mProfilePicture);
-                    Toast.makeText(getActivity(), "Sucessfully set Picture", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "Sucessfully set Picture", Toast.LENGTH_SHORT).show();
                     Log.d("Image Retrive","Set Image Sucessfull");
 
                     ////////////////////Wprk in progress///////////////////////////////////
@@ -201,7 +201,7 @@ public class ProfileActivity extends Fragment {
 
             });
         } else if (requestCode == SELECTING_IMAGE && resultCode == RESULT_CANCELED){
-            Toast.makeText(getActivity(), "Error Selecting Image", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "Error Selecting Image", Toast.LENGTH_SHORT).show();
         }
 
     }

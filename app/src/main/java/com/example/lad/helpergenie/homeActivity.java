@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,13 +41,21 @@ public class homeActivity extends Fragment {
     private DatabaseReference mRef,mRef2;
     private String selectPin,selectPro;
     private Button BtngetSP;
+    ValueEventListener valList;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.layout_home,container,false);
 
+        ConstraintLayout ctl = mView.findViewById(R.id.constraintLayout);
+        if(IsFirstTimeLaunced() == true){
+            ctl.setVisibility(ConstraintLayout.INVISIBLE);
+        }else{
+            ctl.setVisibility(ConstraintLayout.VISIBLE);
+        }
         getActivity().setTitle("Home");
+        Log.d("Pranav","EXE 1");
         String[] listSP = {"plumber" , "electrician" , "carpenter" };
         searchSP = (Spinner)mView.findViewById(R.id.search_sp);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,listSP);
@@ -56,7 +65,7 @@ public class homeActivity extends Fragment {
         searchSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(),searchSP.getItemAtPosition(i).toString(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),searchSP.getItemAtPosition(i).toString(),Toast.LENGTH_SHORT).show();
                 selectPro = searchSP.getItemAtPosition(i).toString();
             }
 
@@ -71,7 +80,7 @@ public class homeActivity extends Fragment {
         pd.setMessage("Fetching Available Pincodes");
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setCancelable(false);
-        pd.show();
+        //pd.show();
 
 
         final ArrayList<String> pinObjectList = new ArrayList<>();
@@ -81,33 +90,23 @@ public class homeActivity extends Fragment {
         mRef = mData.getReference().child("pincode");
         //final ArrayList<String> pincodeList = new ArrayList<>();
 
-        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                    collectPincode((Map<String,Object>) dataSnapshot.getValue());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
+        attachEventListner();
+        //removeEventListner();
 
         searchPin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), searchPin.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), searchPin.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show();
                 selectPin = searchPin.getItemAtPosition(i).toString();
                 mRef2 = mData.getReference().child("pincode").child(selectPin);
-
-
+                Log.d("Pranav","EXE 3");
                 mRef2.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         pinObjectList.clear();
                         for(Map.Entry<String,Object> entry : ((Map<String,Object>)dataSnapshot.getValue()).entrySet()){
+
+                            Log.d("Pranav","EXE 4");
 
                             String SinglePin = (String)entry.getKey();
                             pinObjectList.add(SinglePin);
@@ -117,7 +116,7 @@ public class homeActivity extends Fragment {
                         }
 
                         if(searchPin.getCount() == 0){
-                            getActivity().recreate();
+                            //getActivity().recreate();
                         }else{
                             pd.dismiss();
                         }
@@ -145,13 +144,10 @@ public class homeActivity extends Fragment {
                if(searchPin.getSelectedItem() == null) {
                }else{
                Intent intent = new Intent(getActivity(),get_sp.class);
-               intent.putStringArrayListExtra("Service Provider at this Location",pinObjectList);
+                   Log.d("Pranav","EXE 5");
+                   intent.putStringArrayListExtra("Service Provider at this Location",pinObjectList);
                intent.putExtra("Service Provider Proffesion",selectPro);
                startActivity(intent);
-//               if(searchPin.isSelected()) {
-//               }
-//               else{
-////            }
             }
             }
         });
@@ -180,5 +176,41 @@ public class homeActivity extends Fragment {
 
     }
 
+    public void attachEventListner(){
+
+        valList = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                collectPincode((Map<String,Object>) dataSnapshot.getValue());
+                Log.d("Pranav","EXE 2");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        mRef.addListenerForSingleValueEvent(valList);
+    }
+
+    public void removeEventListner(){
+        mRef.removeEventListener(valList);
+    }
+
+    public boolean IsFirstTimeLaunced(){
+        PrefManager prefManager;
+        prefManager = new PrefManager(getActivity());
+
+        if (!prefManager.isFirstTimeLaunch2()) {
+            //launchHomeScreen();
+            //finish();
+            return false;
+        }
+        else{
+            prefManager.setFirstTimeLaunch2(false);
+            return true;
+        }
+    }
 
 }
