@@ -24,14 +24,16 @@ public class recyclerSP extends RecyclerView.Adapter<recyclerSP.HolderClass> {
 
     Context ct;
     String name[],mobile[],email[],id[],rating[];
+    int ordercomplete[];
 
-    public recyclerSP(Context ctx,String dataname[],String dataemail[],String datamobile[],String dataid[],String datarating[]) {
+    public recyclerSP(Context ctx,String dataname[],String dataemail[],String datamobile[],String dataid[],String datarating[],int dataordercomplete[]) {
         ct = ctx;
         name = dataname;
         mobile = datamobile;
         email = dataemail;
         id = dataid;
         rating = datarating;
+        ordercomplete = dataordercomplete;
     }
 
         @Override
@@ -47,7 +49,7 @@ public class recyclerSP extends RecyclerView.Adapter<recyclerSP.HolderClass> {
         holder.name.setText(name[position]);
         holder.emailID.setText(email[position]);
         holder.mobile.setText(mobile[position]);
-        holder.ID.setText(id[position]);
+        holder.ordercomplete.setText(ordercomplete[position]+"");
         float ratingVal = Float.valueOf(rating[position]);
         holder.ratingBar.setRating(ratingVal);
         holder.ratingBar.setIsIndicator(true);
@@ -67,7 +69,7 @@ public class recyclerSP extends RecyclerView.Adapter<recyclerSP.HolderClass> {
 
     public class HolderClass extends RecyclerView.ViewHolder {
 
-        TextView name,emailID,mobile,ID;
+        TextView name,emailID,mobile,ordercomplete;
         ImageView phoneCall;
         RatingBar ratingBar;
 
@@ -76,7 +78,7 @@ public class recyclerSP extends RecyclerView.Adapter<recyclerSP.HolderClass> {
             name = (TextView) itemView.findViewById(R.id.spName);
             emailID = (TextView) itemView.findViewById(R.id.spEmail);
             mobile = (TextView) itemView.findViewById(R.id.spMobile);
-            ID = (TextView) itemView.findViewById(R.id.spID);
+            ordercomplete = (TextView) itemView.findViewById(R.id.spordercomplete);
             phoneCall = (ImageView) itemView.findViewById(R.id.phoneCall);
             ratingBar = (RatingBar)itemView.findViewById(R.id.ratingBar);
         }

@@ -161,7 +161,7 @@ public class ProfileActivity extends Fragment {
         mPictures.child(MainActivity.MainCurrUserEmail.replace(".","")).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Glide.with(getActivity()).load(downloadPic).into(mProfilePicture);
+                Glide.with(getActivity()).load(uri).into(mProfilePicture);
             }
         });
 
