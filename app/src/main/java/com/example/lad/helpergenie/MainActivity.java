@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity
     private static final int RC_SIGN_IN = 1234;
     private ProgressDialog pd2;
 
+    PrefManager prefManager;
+
     FragmentManager fragmentManager;
     FirebaseAuth auth = FirebaseAuth.getInstance();
     public static String CurrUser;
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        prefManager = new PrefManager(MainActivity.this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -96,7 +99,17 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         fragmentManager =  getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new homeActivity()).commit();
+
+
+        if (!prefManager.isFirstTimeLaunch()) {
+            fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new homeActivity()).commit();
+            Log.d("FirstTimePro","Is not Started");
+        }else{
+            prefManager.setFirstTimeLaunch(false);
+            Log.d("FirstTimePro","Is Started");
+            fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new firsttime()).commit();
+        }
+
         //navigationView.setCheckedItem(0);
 
     }
@@ -292,5 +305,16 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
+
+    public boolean IsFirstTimeLaunced(){
+        if (!prefManager.isFirstTimeLaunch2()) {
+            return false;
+        }
+        else{
+            prefManager.setFirstTimeLaunch2(false);
+            return true;
+        }
+    }
+
 
 }

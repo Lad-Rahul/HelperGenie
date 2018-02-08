@@ -48,15 +48,15 @@ public class homeActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.layout_home,container,false);
 
-        ConstraintLayout ctl = mView.findViewById(R.id.constraintLayout);
-        if(IsFirstTimeLaunced() == true){
-            ctl.setVisibility(ConstraintLayout.INVISIBLE);
-        }else{
-            ctl.setVisibility(ConstraintLayout.VISIBLE);
-        }
-        getActivity().setTitle("Home");
+//        ConstraintLayout ctl = mView.findViewById(R.id.constraintLayout);
+//        if(IsFirstTimeLaunced() == true){
+//            ctl.setVisibility(ConstraintLayout.INVISIBLE);
+//        }else{
+//            ctl.setVisibility(ConstraintLayout.VISIBLE);
+//        }
+//        getActivity().setTitle("Home");
         Log.d("Pranav","EXE 1");
-        String[] listSP = {"plumber" , "electrician" , "carpenter" };
+        String[] listSP = {"Plumber" , "Electrician" , "Carpenter","PestControl","HomeCleaner","Mechannic" };
         searchSP = (Spinner)mView.findViewById(R.id.search_sp);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,listSP);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -80,7 +80,7 @@ public class homeActivity extends Fragment {
         pd.setMessage("Fetching Available Pincodes");
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setCancelable(false);
-        //pd.show();
+        pd.show();
 
 
         final ArrayList<String> pinObjectList = new ArrayList<>();
@@ -197,20 +197,4 @@ public class homeActivity extends Fragment {
     public void removeEventListner(){
         mRef.removeEventListener(valList);
     }
-
-    public boolean IsFirstTimeLaunced(){
-        PrefManager prefManager;
-        prefManager = new PrefManager(getActivity());
-
-        if (!prefManager.isFirstTimeLaunch2()) {
-            //launchHomeScreen();
-            //finish();
-            return false;
-        }
-        else{
-            prefManager.setFirstTimeLaunch2(false);
-            return true;
-        }
-    }
-
 }
