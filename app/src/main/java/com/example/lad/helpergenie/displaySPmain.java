@@ -19,6 +19,7 @@ public class displaySPmain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_display_spmain);
+        this.setTitle("Service Providers");
 
         Bundle extra=getIntent().getExtras();
         rec3ID = extra.getStringArray("IDs");

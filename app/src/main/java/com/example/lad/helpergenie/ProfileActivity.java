@@ -72,6 +72,7 @@ public class ProfileActivity extends Fragment {
         mView = inflater.inflate(R.layout.activity_profile,container,false);
         final ProgressDialog pd = new ProgressDialog(getActivity());
         pd.setTitle("Please Wait...");
+        getActivity().setTitle("Profile");
         pd.setMessage("Fetching Your Profile...");
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setCancelable(false);

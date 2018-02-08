@@ -21,6 +21,7 @@ public class HelpActivity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.activity_help,container,false);
+        getActivity().setTitle("Help");
         return mView;
     }
 }

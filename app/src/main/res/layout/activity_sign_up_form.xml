@@ -5,11 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bkgpic"
     tools:context="com.example.lad.helpergenie.SignUpFormActivity">
 
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bkg_home"
     >
 
     <android.support.design.widget.TextInputLayout

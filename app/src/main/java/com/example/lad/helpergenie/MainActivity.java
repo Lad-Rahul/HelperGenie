@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -75,8 +76,14 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
+
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", "helpergenie@gmail.com", null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "");
+                startActivity(emailIntent);
+
             }
         });
 
@@ -112,7 +119,7 @@ public class MainActivity extends AppCompatActivity
         pd2.setMessage("Veryfying Your Data....\nMake sure you have active connection");
         pd2.setTitle("Veryfying");
         pd2.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pd2.show();
+        //pd2.show();
         FirebaseUser user = auth.getCurrentUser();
         if (user != null) {
             // signed In
@@ -120,7 +127,7 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(MainActivity.this, user.getDisplayName()+" is Logged in !", Toast.LENGTH_SHORT).show();
             CurrUser = user.getDisplayName();
             MainCurrUserEmail = user.getEmail().toString();
-            pd2.dismiss();
+            //pd2.dismiss();
             checkFormAndSaveDetails(user.getEmail().toString().replace(".",""),user.getDisplayName());
         } else {
             // not signed in
@@ -180,6 +187,7 @@ public class MainActivity extends AppCompatActivity
             if(navigationView.getMenu().getItem(0).isChecked() == false){
                 fragmentManager =  getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new homeActivity()).commit();
+                navigationView.getMenu().getItem(0).setChecked(true);
             }else{
                 super.onBackPressed();
             }
@@ -228,22 +236,36 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_logout) {
             AuthUI.getInstance().signOut(MainActivity.this);
             Toast.makeText(MainActivity.this, "Sucessfully LoggedOut", Toast.LENGTH_SHORT).show();
+            //finish();
             onResume();
         } else if (id == R.id.nav_share) {
-            ApplicationInfo api = getApplicationContext().getApplicationInfo();
-            String apkPath = api.sourceDir;
-            copy(new File(apkPath),new File("/storage/self/primary/Download/base.apk"));
-            Intent share = new Intent(Intent.ACTION_SEND);
-            share.setType("*/*");
-            share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            share.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                ApplicationInfo api = getApplicationContext().getApplicationInfo();
+                String apkPath = api.sourceDir;
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("application/vnd.android.package-archive");
+                Uri shareURI = Uri.fromFile(new File(apkPath));
+                String str = shareURI.toString().replace("file","content");
+                share.putExtra(Intent.EXTRA_STREAM,Uri.parse(str));
+                startActivity(Intent.createChooser(share,"Share Using..."));
+            }
+            else {
+                ApplicationInfo api = getApplicationContext().getApplicationInfo();
+                String apkPath = api.sourceDir;
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("application/vnd.android.package-archive");
+                share.putExtra(Intent.EXTRA_STREAM,Uri.fromFile(new File(apkPath)));
+                startActivity(Intent.createChooser(share,"Share Using..."));
+            }
+
+
             //Uri shareURI = new Uri(""+Uri.fromFile(new File(apkPath)).toString().replace("file","content"));
             //Uri shareURI = FileProvider.getUriForFile(this, "provyas.my.package.name.provider", new File(apkPath));
             //Uri shareURI = Uri.parse("content://"+apkPath);
             //share.putExtra(Intent.EXTRA_STREAM, shareURI);
             //share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(apkPath)));
             //share.putExtra(Intent.EXTRA_STREAM, shareURI);
-            //startActivity(Intent.createChooser(share,"Start Using..."));
+            //startActivity(Intent.createChooser(share,"Share Using..."));
 
         }else if (id == R.id.nav_aboutus) {
             fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new about_us()).commit();

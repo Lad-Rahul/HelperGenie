@@ -24,6 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Pro on 1/19/2018.
@@ -44,6 +46,7 @@ public class homeActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.layout_home,container,false);
 
+        getActivity().setTitle("Home");
         String[] listSP = {"plumber" , "electrician" , "carpenter" };
         searchSP = (Spinner)mView.findViewById(R.id.search_sp);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,listSP);
@@ -114,7 +117,7 @@ public class homeActivity extends Fragment {
                         }
 
                         if(searchPin.getCount() == 0){
-
+                            getActivity().recreate();
                         }else{
                             pd.dismiss();
                         }

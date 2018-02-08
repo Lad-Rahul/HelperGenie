@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/abstract_design_vector_background_graphic_illustration"
+
     tools:context="com.example.lad.helpergenie.displaySPmain">
 
     <android.support.v7.widget.RecyclerView

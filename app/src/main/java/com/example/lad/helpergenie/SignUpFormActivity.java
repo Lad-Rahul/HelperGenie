@@ -31,7 +31,7 @@ public class SignUpFormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_sign_up_form);
-
+        this.setTitle("Sign Up Form");
         AlertDialog.Builder builder= new AlertDialog.Builder(this);
         builder.setTitle("Please Fill This Form")
                 .setMessage("In Order to Get your details you have to fill this details in given area")
