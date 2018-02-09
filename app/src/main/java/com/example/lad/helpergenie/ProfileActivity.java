@@ -166,6 +166,7 @@ public class ProfileActivity extends Fragment {
             }
         });
 
+        Toast.makeText(getActivity(), "Please Wait till Profile Photo is Being Loaded", Toast.LENGTH_LONG).show();
         return mView;
     }
 

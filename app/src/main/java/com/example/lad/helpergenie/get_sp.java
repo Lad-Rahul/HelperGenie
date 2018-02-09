@@ -42,12 +42,12 @@ public class get_sp extends AppCompatActivity {
             } else {
                 ListSP = extras.getStringArrayList("Service Provider at this Location");
                 SPpro = extras.getString("Service Provider Proffesion").toString();
-                Toast.makeText(get_sp.this,SPpro,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(get_sp.this,SPpro,Toast.LENGTH_SHORT).show();
             }
         }
 
         for(int i=0;i<ListSP.size();i++){
-            Toast.makeText(get_sp.this,ListSP.get(i).toString(),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(get_sp.this,ListSP.get(i).toString(),Toast.LENGTH_SHORT).show();
         }
 
 

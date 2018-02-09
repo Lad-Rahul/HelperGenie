@@ -28,7 +28,7 @@ public class firsttime extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         mView = inflater.inflate(R.layout.firsttime,container,false);
-        getActivity().setTitle("Help");
+        getActivity().setTitle("HelperGenie");
         //PrefManager pref = new PrefManager(getActivity());
 
 //        pref.setFirstTimeLaunch(true);

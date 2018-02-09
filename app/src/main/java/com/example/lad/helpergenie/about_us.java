@@ -3,7 +3,9 @@ package com.example.lad.helpergenie;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +16,8 @@ import android.widget.Adapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +33,7 @@ public class about_us extends Fragment {
     private HashMap<String,List<String>> expHeader;
     private List<String> expChild;
     private ExpandableListView expList;
+    private TextView pranav,akash,rahul;
     expAdapter adapter;
 
     @Nullable
@@ -36,8 +41,39 @@ public class about_us extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.about_us_new,container,false);
         getActivity().setTitle("About us");
+        rahul = (TextView)mView.findViewById(R.id.textView14);
+        akash = (TextView)mView.findViewById(R.id.textView15);
+        pranav = (TextView)mView.findViewById(R.id.textView887);
 
+        rahul.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i1 = new Intent(Intent.ACTION_VIEW);
+                Uri uri = Uri.parse("https://github.com/Lad-Rahul/");
+                i1.setData(uri);
+                startActivity(i1);
+            }
+        });
 
+        pranav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i1 = new Intent(Intent.ACTION_VIEW);
+                Uri uri = Uri.parse("https://github.com/PranavVyas");
+                i1.setData(uri);
+                startActivity(i1);
+            }
+        });
+
+        akash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i1 = new Intent(Intent.ACTION_VIEW);
+                Uri uri = Uri.parse("https://github.com/pas7582128");
+                i1.setData(uri);
+                startActivity(i1);
+            }
+        });
 
 //        expList = (ExpandableListView)mView.findViewById(R.id.expList_aboutus);
 //        expHeader = expAdapter.DataProvider.getInfo();
