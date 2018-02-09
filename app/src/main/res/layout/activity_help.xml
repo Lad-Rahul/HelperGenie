@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:gravity="center"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
         <TextView
@@ -74,6 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -133,6 +135,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -191,6 +194,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:gravity="center"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
         <TextView
@@ -242,6 +246,65 @@
             android:textStyle="bold"
             android:textSize="32dp"/>
     </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Q "
+                android:layout_marginLeft="4dp"
+                android:textStyle="bold"
+                android:textColor="#ff5555"
+                android:background="@drawable/bkg_answer"
+                android:textSize="32dp"/>
+
+            <TextView
+                android:id="@+id/text_q5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:background="@drawable/bkg_question"
+                android:layout_marginRight="48dp"
+                android:text="@string/q5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/text_a5"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:background="@drawable/bkg_answer"
+                android:text="@string/a5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" A "
+                android:background="@drawable/bkg_question"
+                android:layout_marginRight="4dp"
+                android:textColor="#5555ff"
+                android:textStyle="bold"
+                android:textSize="32dp"/>
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>
