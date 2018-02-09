@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity
     public static String MainCurrUserEmail;
     public ImageView mProfileImage;
     NavigationView navigationView;
+    public boolean flag=false;
 
 
     @Override
@@ -103,10 +104,12 @@ public class MainActivity extends AppCompatActivity
 
         if (!prefManager.isFirstTimeLaunch()) {
             fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new homeActivity()).commit();
+            flag=false;
             Log.d("FirstTimePro","Is not Started");
         }else{
             prefManager.setFirstTimeLaunch(false);
             Log.d("FirstTimePro","Is Started");
+            flag=true;
             fragmentManager.beginTransaction().replace(R.id.alternatingLayout,new firsttime()).commit();
         }
 
@@ -156,8 +159,9 @@ public class MainActivity extends AppCompatActivity
                     RC_SIGN_IN);
 
         }
-
-        navigationView.getMenu().getItem(0).setChecked(true);
+        if(!flag) {
+            navigationView.getMenu().getItem(0).setChecked(true);
+        }
         //Only For DEVELOPMENT OF RETRIVEING DATA:::::::::::::::::::::::
         //Intent i1 = new Intent(this,TrialFirebase.class);
         //startActivity(i1);
