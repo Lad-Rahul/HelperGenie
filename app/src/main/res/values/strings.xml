@@ -22,5 +22,8 @@
     <string name="q4">What is minimum version of Android required?</string>
     <string name="a4">Kitkat - 4.4.4</string>
 
+    <string name="q5">What are the Payment method available?</string>
+    <string name="a5">You can payment through Cash-on-delivery,Debitcard,Paytm,UPI and Netbanking</string>
+
 
 </resources>
