@@ -47,7 +47,7 @@ public class homeActivity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.layout_home,container,false);
-
+            getActivity().setTitle("Home");
 //        ConstraintLayout ctl = mView.findViewById(R.id.constraintLayout);
 //        if(IsFirstTimeLaunced() == true){
 //            ctl.setVisibility(ConstraintLayout.INVISIBLE);
