@@ -29,14 +29,15 @@ public class about_us extends Fragment {
     private HashMap<String,List<String>> expHeader;
     private List<String> expChild;
     private ExpandableListView expList;
-
     expAdapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.about_us_new,container,false);
-//        getActivity().setTitle("About us");
+        getActivity().setTitle("About us");
+
+
 
 //        expList = (ExpandableListView)mView.findViewById(R.id.expList_aboutus);
 //        expHeader = expAdapter.DataProvider.getInfo();
