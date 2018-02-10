@@ -66,19 +66,26 @@ public class SignUpFormActivity extends AppCompatActivity {
                 String tadd2 = Fadd2.getText().toString();
                 String tpin = Fpin.getText().toString();
                 if( tmobile.matches("")){
-                    //Toast.makeText(SignUpFormActivity.this,"Write Mobile No",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpFormActivity.this,"Write Mobile No",Toast.LENGTH_SHORT).show();
                 }
                 else if(tadd1.matches("")){
-                    //Toast.makeText(SignUpFormActivity.this,"Write Address line 1",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpFormActivity.this,"Write Address line 1",Toast.LENGTH_SHORT).show();
                 }
                 else if(tadd2.matches("")){
-                    //Toast.makeText(SignUpFormActivity.this,"Write Address line 2",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpFormActivity.this,"Write Address line 2",Toast.LENGTH_SHORT).show();
                 }
                 else if(tpin.matches("")){
-                    //Toast.makeText(SignUpFormActivity.this,"Write Pincode",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpFormActivity.this,"Write Pincode",Toast.LENGTH_SHORT).show();
                 }
                 else if(tpin.length() != 6){
-                    //Toast.makeText(SignUpFormActivity.this,"Enter Proper Pincode",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpFormActivity.this,"Enter Proper Pincode",Toast.LENGTH_SHORT).show();
+                }
+                else if(tmobile.length() != 10){
+                    Toast.makeText(SignUpFormActivity.this,"Enter Proper Mobile no",Toast.LENGTH_SHORT).show();
+                }
+                else if(checkmobile(tmobile) == false)
+                {
+                    Toast.makeText(SignUpFormActivity.this,"Enter Proper Mobile No",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     sendData();
@@ -122,4 +129,25 @@ public class SignUpFormActivity extends AppCompatActivity {
         AuthUI.getInstance().signOut(SignUpFormActivity.this);
         super.onBackPressed();
     }
+
+    public boolean checkmobile(String mob){
+        int flag = 0;
+        for(int i=0;i<mob.length();i++){
+            if(mob.charAt(i) == '0' || mob.charAt(i) == '1' || mob.charAt(i) == '2' || mob.charAt(i) == '3' || mob.charAt(i) == '4' || mob.charAt(i) == '5' || mob.charAt(i) == '6' || mob.charAt(i) == '7' || mob.charAt(i) == '8' || mob.charAt(i) == '9' ){
+
+            }
+            else{
+                flag = 1;
+                break;
+            }
+        }
+
+        if(flag == 1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
 }
